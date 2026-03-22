@@ -1,0 +1,158 @@
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background: #f0ece3;
+		font-family: Georgia, serif;
+		overflow: hidden;
+		width: 100vw;
+		height: 100vh;
+	}
+
+	#app {
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	#toolbar {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 7px 14px;
+		background: #e8e3d8;
+		border-bottom: 1px solid #c8c0a8;
+		flex-shrink: 0;
+		flex-wrap: wrap;
+	}
+
+	.tool-btn {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		padding: 5px 11px;
+		border: 1.5px solid #8a7a60;
+		background: transparent;
+		border-radius: 3px;
+		cursor: pointer;
+		font-family: Georgia, serif;
+		font-size: 12px;
+		color: #3a2e1e;
+		transition: background 0.15s;
+	}
+
+	.tool-btn.active {
+		background: #3a2e1e;
+		color: #f0ece3;
+	}
+
+	.tool-btn:hover {
+		background: #d0c8b4;
+		color: #3a2e1e;
+	}
+
+	.tool-btn.active:hover {
+		background: #3a2e1e;
+		color: #f0ece3;
+	}
+
+	.divider {
+		width: 1px;
+		height: 22px;
+		background: #c8c0a8;
+		flex-shrink: 0;
+	}
+
+	.mute-btn {
+		padding: 3px 8px;
+		border: 1.5px solid #8a7a60;
+		background: transparent;
+		border-radius: 3px;
+		cursor: pointer;
+		font-family: Georgia, serif;
+		font-size: 10px;
+		color: #3a2e1e;
+		transition: all 0.15s;
+		white-space: nowrap;
+	}
+
+	.mute-btn.muted {
+		background: #8a7a60;
+		color: #f0ece3;
+		text-decoration: line-through;
+	}
+
+	.mute-btn:hover {
+		background: #d0c8b4;
+	}
+
+	.mute-btn.muted:hover {
+		background: #6a5a48;
+	}
+
+	.mute-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 3px;
+	}
+
+	.mute-label {
+		font-size: 9px;
+		color: #8a7a60;
+		letter-spacing: 0.03em;
+	}
+
+	#play-btn {
+		padding: 5px 16px;
+		border: 1.5px solid #3a2e1e;
+		background: #3a2e1e;
+		color: #f0ece3;
+		border-radius: 3px;
+		cursor: pointer;
+		font-family: Georgia, serif;
+		font-size: 12px;
+		margin-left: auto;
+	}
+
+	#play-btn:hover {
+		background: #5a4a30;
+	}
+
+	#bpm-wrap {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		color: #3a2e1e;
+	}
+
+	#bpm {
+		width: 72px;
+		accent-color: #3a2e1e;
+	}
+
+	#canvas-wrap {
+		flex: 1;
+		position: relative;
+		overflow: hidden;
+	}
+
+	canvas {
+		display: block;
+	}
+
+	#hint {
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 11px;
+		color: #8a7a60;
+		pointer-events: none;
+		letter-spacing: 0.05em;
+	}
