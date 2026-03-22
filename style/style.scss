@@ -1,3 +1,7 @@
+$WHITE_COLOR: #FFF;
+$KIND_OF_WHITE_COLOR: #ccc;
+$BLUE_COLOR: #1900FF;
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -5,7 +9,7 @@
 }
 
 body {
-	background: #f0ece3;
+	background: $WHITE_COLOR;
 	font-family: Georgia, serif;
 	overflow: hidden;
 	width: 100vw;
@@ -50,8 +54,7 @@ body {
 			align-items: center;
 			gap: 8px;
 			padding: 7px 14px;
-			background: #e8e3d8;
-			border-bottom: 1px solid #c8c0a8;
+			background: $WHITE_COLOR;
 			flex-shrink: 0;
 			flex-wrap: wrap;
 
@@ -60,59 +63,59 @@ body {
 				align-items: center;
 				gap: 5px;
 				padding: 5px 11px;
-				border: 1.5px solid #8a7a60;
+				border: 1.5px solid $BLUE_COLOR;
 				background: transparent;
 				border-radius: 3px;
 				cursor: pointer;
 				font-family: Georgia, serif;
 				font-size: 12px;
-				color: #3a2e1e;
+				color: $BLUE_COLOR;
 				transition: background 0.15s;
 			}
 
 			.tool-btn.active {
-				background: #3a2e1e;
-				color: #f0ece3;
+				background: $BLUE_COLOR;
+				color: $WHITE_COLOR;
 			}
 
 			.tool-btn:hover {
-				background: #d0c8b4;
-				color: #3a2e1e;
+				background: $KIND_OF_WHITE_COLOR;
+				color: $BLUE_COLOR;
 			}
 
 			.tool-btn.active:hover {
-				background: #3a2e1e;
-				color: #f0ece3;
+				background: $BLUE_COLOR;
+				color: $WHITE_COLOR;
 			}
 
 			.divider {
 				width: 1px;
 				height: 22px;
-				background: #c8c0a8;
+				background: $BLUE_COLOR;
 				flex-shrink: 0;
 			}
 
 			.mute-btn {
 				padding: 3px 8px;
-				border: 1.5px solid #8a7a60;
+				border: 1.5px solid $BLUE_COLOR;
 				background: transparent;
 				border-radius: 3px;
 				cursor: pointer;
 				font-family: Georgia, serif;
 				font-size: 10px;
-				color: #3a2e1e;
+				color: $BLUE_COLOR;
 				transition: all 0.15s;
 				white-space: nowrap;
 			}
 
 			.mute-btn.muted {
-				background: #8a7a60;
-				color: #f0ece3;
+				background: $BLUE_COLOR;
+				color: $WHITE_COLOR;
 				text-decoration: line-through;
 			}
 
 			.mute-btn:hover {
-				background: #d0c8b4;
+				background: $KIND_OF_WHITE_COLOR;
 			}
 
 			.mute-btn.muted:hover {
@@ -128,15 +131,15 @@ body {
 
 			.mute-label {
 				font-size: 9px;
-				color: #8a7a60;
+				color: $BLUE_COLOR;
 				letter-spacing: 0.03em;
 			}
 
 			#play-btn {
 				padding: 5px 16px;
-				border: 1.5px solid #3a2e1e;
-				background: #3a2e1e;
-				color: #f0ece3;
+				border: 1.5px solid $BLUE_COLOR;
+				background: $BLUE_COLOR;
+				color: $WHITE_COLOR;
 				border-radius: 3px;
 				cursor: pointer;
 				font-family: Georgia, serif;
@@ -153,12 +156,12 @@ body {
 				align-items: center;
 				gap: 6px;
 				font-size: 12px;
-				color: #3a2e1e;
+				color: $BLUE_COLOR;
 			}
 
 			#bpm {
 				width: 72px;
-				accent-color: #3a2e1e;
+				accent-color: $BLUE_COLOR;
 			}
 		}
 	}

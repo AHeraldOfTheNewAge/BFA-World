@@ -5,7 +5,7 @@
 }
 
 body {
-  background: #f0ece3;
+  background: #FFF;
   font-family: Georgia, serif;
   overflow: hidden;
   width: 100vw;
@@ -46,8 +46,7 @@ body #app #toolbar {
   align-items: center;
   gap: 8px;
   padding: 7px 14px;
-  background: #e8e3d8;
-  border-bottom: 1px solid #c8c0a8;
+  background: #FFF;
   flex-shrink: 0;
   flex-wrap: wrap;
 }
@@ -56,52 +55,52 @@ body #app #toolbar .tool-btn {
   align-items: center;
   gap: 5px;
   padding: 5px 11px;
-  border: 1.5px solid #8a7a60;
+  border: 1.5px solid #1900FF;
   background: transparent;
   border-radius: 3px;
   cursor: pointer;
   font-family: Georgia, serif;
   font-size: 12px;
-  color: #3a2e1e;
+  color: #1900FF;
   transition: background 0.15s;
 }
 body #app #toolbar .tool-btn.active {
-  background: #3a2e1e;
-  color: #f0ece3;
+  background: #1900FF;
+  color: #FFF;
 }
 body #app #toolbar .tool-btn:hover {
-  background: #d0c8b4;
-  color: #3a2e1e;
+  background: #ccc;
+  color: #1900FF;
 }
 body #app #toolbar .tool-btn.active:hover {
-  background: #3a2e1e;
-  color: #f0ece3;
+  background: #1900FF;
+  color: #FFF;
 }
 body #app #toolbar .divider {
   width: 1px;
   height: 22px;
-  background: #c8c0a8;
+  background: #1900FF;
   flex-shrink: 0;
 }
 body #app #toolbar .mute-btn {
   padding: 3px 8px;
-  border: 1.5px solid #8a7a60;
+  border: 1.5px solid #1900FF;
   background: transparent;
   border-radius: 3px;
   cursor: pointer;
   font-family: Georgia, serif;
   font-size: 10px;
-  color: #3a2e1e;
+  color: #1900FF;
   transition: all 0.15s;
   white-space: nowrap;
 }
 body #app #toolbar .mute-btn.muted {
-  background: #8a7a60;
-  color: #f0ece3;
+  background: #1900FF;
+  color: #FFF;
   text-decoration: line-through;
 }
 body #app #toolbar .mute-btn:hover {
-  background: #d0c8b4;
+  background: #ccc;
 }
 body #app #toolbar .mute-btn.muted:hover {
   background: #6a5a48;
@@ -114,14 +113,14 @@ body #app #toolbar .mute-group {
 }
 body #app #toolbar .mute-label {
   font-size: 9px;
-  color: #8a7a60;
+  color: #1900FF;
   letter-spacing: 0.03em;
 }
 body #app #toolbar #play-btn {
   padding: 5px 16px;
-  border: 1.5px solid #3a2e1e;
-  background: #3a2e1e;
-  color: #f0ece3;
+  border: 1.5px solid #1900FF;
+  background: #1900FF;
+  color: #FFF;
   border-radius: 3px;
   cursor: pointer;
   font-family: Georgia, serif;
@@ -136,9 +135,9 @@ body #app #toolbar #bpm-wrap {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #3a2e1e;
+  color: #1900FF;
 }
 body #app #toolbar #bpm {
   width: 72px;
-  accent-color: #3a2e1e;
+  accent-color: #1900FF;
 }/*# sourceMappingURL=style.css.map */
