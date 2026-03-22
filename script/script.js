@@ -3,7 +3,7 @@ var ctx = canvas.getContext('2d');
 var wrap = document.getElementById('canvas-wrap');
 var svgLayer = document.getElementById('svg-layer');
 
-var COLS = 48, ROWS = 32;
+var COLS = 50, ROWS = 50;
 var W, H, TW, TH;
 var mapTiles = [];
 var objects = [];
@@ -213,7 +213,7 @@ function resize() {
 
 function drawMap() {
 	var r, c, row, col, t, tx, ty, l, lx, ly, hl, hlx;
-	ctx.fillStyle = '#e8e3d5'; ctx.fillRect(0, 0, W, H);
+	ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
 	var rand2 = seededRand(42);
 	ctx.fillStyle = '#c8c0aa';
 
@@ -228,9 +228,9 @@ function drawMap() {
 			t = mapTiles[row][col]; tx = col * TW; ty = row * TH;
 
 			if (t === 1) {
-				ctx.fillStyle = '#b8ccd4'; ctx.fillRect(tx, ty, TW, TH);
+				ctx.fillStyle = '#1900FF'; ctx.fillRect(tx, ty, TW, TH);
 				var sr2 = seededRand((row * 100 + col) * 7);
-				ctx.strokeStyle = '#9ab4be'; ctx.lineWidth = 0.5;
+				ctx.strokeStyle = '#fff'; ctx.lineWidth = 0.5;
 
 				for (l = 0; l < 2; l++) {
 					lx = tx + TW * 0.1 + sr2() * TW * 0.6; ly = ty + TH * 0.3 + l * TH * 0.3;

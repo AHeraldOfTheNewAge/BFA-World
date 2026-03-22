@@ -11,7 +11,7 @@
 
 	<body>
 		<div id="app">
-			<div id='header'>TODO</div>
+			<div id='header'>BFA-World</div>
 			<div id="canvas-wrap">
 				<canvas id="canvas"></canvas>
 				<svg id="svg-layer"></svg>
@@ -35,7 +35,7 @@
 				<div class="mute-group"><span class="mute-label">pebbles</span><button class="mute-btn" id="mute-pebble" onclick="toggleMute('pebble')">M</button></div>
 				<div class="divider"></div>
 				<div id="bpm-wrap">
-					<label for="bpm">BPM</label>
+					<label for="bpm">Speed</label>
 					<input type="range" id="bpm" min="40" max="180" value="90" oninput="updateBPM(this.value)">
 					<span id="bpm-val">90</span>
 				</div>
@@ -47,11 +47,22 @@
 		<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
 			<defs>
 				<!-- Pine tree -->
-				<symbol id="sym-tree" viewBox="0 0 40 48">
+				<symbol id="sym-treeO" viewBox="0 0 40 48">
 					<rect x="17" y="34" width="6" height="12" fill="#6a4020" />
 					<polygon points="20,2 4,20 36,20" fill="#2a4e1a" />
 					<polygon points="20,10 3,30 37,30" fill="#3a6e28" />
 					<polygon points="20,18 2,38 38,38" fill="#4a8838" />
+				</symbol>
+				<symbol id="sym-tree" width="33" height="87" viewBox="0 0 33 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<line x1="14.5" y1="86.6207" x2="14.5" y2="0.620697" stroke="#1900FF" />
+					<line x1="13.392" y1="0.310346" x2="32.392" y2="24.3103" stroke="#1900FF" />
+					<line x1="15.424" y1="0.885697" x2="0.423999" y2="24.8857" stroke="#1900FF" />
+					<line x1="15.3427" y1="34.2566" x2="32.3427" y2="50.2566" stroke="#1900FF" />
+					<line x1="15.3648" y1="34.9627" x2="0.364768" y2="50.9627" stroke="#1900FF" />
+					<line x1="15.3536" y1="53.2671" x2="30.3536" y2="68.2671" stroke="#1900FF" />
+					<line x1="15.4" y1="48.9207" x2="0.399999" y2="68.9207" stroke="#1900FF" />
+					<line x1="15.3536" y1="19.9743" x2="0.353554" y2="34.9743" stroke="#1900FF" />
+					<line x1="15.3308" y1="19.2458" x2="32.3308" y2="34.2458" stroke="#1900FF" />
 				</symbol>
 				<!-- Pine tree lit -->
 				<symbol id="sym-tree-lit" viewBox="0 0 40 48">
