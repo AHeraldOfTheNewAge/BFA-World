@@ -1,4 +1,4 @@
-var canvas = document.getElementById('c');
+var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var wrap = document.getElementById('canvas-wrap');
 var svgLayer = document.getElementById('svg-layer');
@@ -30,8 +30,10 @@ var FNOTES_WATER = ['C6', 'D6', 'Eb6', 'F6', 'G6', 'Bb6'];
 
 function seededRand(seed) {
 	var s = seed;
+
 	return function() {
 		s = (s * 1664525 + 1013904223) & 0xffffffff;
+
 		return (s >>> 0) / 4294967296;
 	};
 }
@@ -99,53 +101,94 @@ function initAudio() {
 function toggleMute(type) {
 	muted[type] = !muted[type];
 	var btn = document.getElementById('mute-' + type);
-	if (muted[type]) btn.classList.add('muted');
-	else btn.classList.remove('muted');
+
+	if (muted[type]) {
+		btn.classList.add('muted');
+
+		return;
+	}
+
+	btn.classList.remove('muted');
 }
 
 function safeSet(r, c, val) {
-	if (r < 0 || r >= ROWS || c < 0 || c >= COLS) return;
-	if (!mapTiles[r]) mapTiles[r] = [];
+	if (r < 0 || r >= ROWS || c < 0 || c >= COLS) {
+		return;
+	}
+
+	if (!mapTiles[r]) {
+		mapTiles[r] = [];
+	}
+
 	mapTiles[r][c] = val;
 }
 
 function generateMap() {
 	var rand = seededRand(Date.now() & 0xfffff);
 	var r, c, i, cx, cy, rx, ry, dx, dy;
+
 	mapTiles = [];
+
 	for (r = 0; r < ROWS; r++) {
 		mapTiles[r] = [];
-		for (c = 0; c < COLS; c++) mapTiles[r][c] = 0;
+
+		for (c = 0; c < COLS; c++) {
+			mapTiles[r][c] = 0;
+		}
 	}
+
 	var nWater = 9 + Math.floor(rand() * 5);
+
 	for (i = 0; i < nWater; i++) {
 		cx = 3 + Math.floor(rand() * (COLS - 6));
 		cy = 2 + Math.floor(rand() * (ROWS - 4));
 		rx = 2 + Math.floor(rand() * 6);
 		ry = 1 + Math.floor(rand() * 4);
+
 		for (r = cy - ry - 2; r <= cy + ry + 2; r++) {
 			for (c = cx - rx - 2; c <= cx + rx + 2; c++) {
 				dx = (c - cx) / rx; dy = (r - cy) / ry;
-				if (dx * dx + dy * dy < 1 + rand() * 0.6) safeSet(r, c, 1);
+
+				if (dx * dx + dy * dy < 1 + rand() * 0.6) {
+					safeSet(r, c, 1);
+				}
 			}
 		}
 	}
+
 	var nRivers = 2 + Math.floor(rand() * 3);
+
 	for (i = 0; i < nRivers; i++) {
 		var rc = Math.floor(rand() * COLS), rr = Math.floor(rand() * ROWS);
 		var len = 8 + Math.floor(rand() * 14);
+
 		for (var s = 0; s < len; s++) {
 			safeSet(rr, rc, 1); safeSet(rr, rc + 1, 1);
+
 			var dir = rand();
-			if (dir < 0.5) rc += 1; else if (dir < 0.75) rr += 1; else rr -= 1;
+
+			if (dir < 0.5) {
+				rc += 1;
+
+				continue;
+			}
+
+			if (dir < 0.75) {
+				rr += 1;
+			}
+
+			rr -= 1;
 		}
 	}
+
 	var nHills = 7 + Math.floor(rand() * 5);
+
 	for (i = 0; i < nHills; i++) {
 		cx = 2 + Math.floor(rand() * (COLS - 4));
 		cy = 1 + Math.floor(rand() * (ROWS - 2));
 		rx = 2 + Math.floor(rand() * 5);
 		ry = 1 + Math.floor(rand() * 4);
+
 		for (r = cy - ry; r <= cy + ry; r++) {
 			for (c = cx - rx; c <= cx + rx; c++) {
 				if (r < 0 || r >= ROWS || c < 0 || c >= COLS) continue;
@@ -173,18 +216,22 @@ function drawMap() {
 	ctx.fillStyle = '#e8e3d5'; ctx.fillRect(0, 0, W, H);
 	var rand2 = seededRand(42);
 	ctx.fillStyle = '#c8c0aa';
+
 	for (var i = 0; i < 1800; i++) {
 		var sx = rand2() * W, sy = rand2() * H;
 		var sc = Math.floor(sx / TW), sr = Math.floor(sy / TH);
 		if (sc >= 0 && sc < COLS && sr >= 0 && sr < ROWS && mapTiles[sr][sc] === 0) ctx.fillRect(sx, sy, 1, 1);
 	}
+
 	for (row = 0; row < ROWS; row++) {
 		for (col = 0; col < COLS; col++) {
 			t = mapTiles[row][col]; tx = col * TW; ty = row * TH;
+
 			if (t === 1) {
 				ctx.fillStyle = '#b8ccd4'; ctx.fillRect(tx, ty, TW, TH);
 				var sr2 = seededRand((row * 100 + col) * 7);
 				ctx.strokeStyle = '#9ab4be'; ctx.lineWidth = 0.5;
+
 				for (l = 0; l < 2; l++) {
 					lx = tx + TW * 0.1 + sr2() * TW * 0.6; ly = ty + TH * 0.3 + l * TH * 0.3;
 					ctx.beginPath(); ctx.moveTo(lx, ly); ctx.quadraticCurveTo(lx + TW * 0.15, ly - TH * 0.1, lx + TW * 0.3, ly); ctx.stroke();
@@ -193,6 +240,7 @@ function drawMap() {
 				ctx.fillStyle = '#d0c8a8'; ctx.fillRect(tx, ty, TW, TH);
 				var sh = seededRand((row * 100 + col) * 13);
 				ctx.strokeStyle = '#a89878'; ctx.lineWidth = 0.4;
+
 				for (hl = 0; hl < 3; hl++) {
 					hlx = tx + sh() * TW;
 					ctx.beginPath(); ctx.moveTo(hlx, ty); ctx.lineTo(hlx + TW * 0.3, ty + TH); ctx.stroke();
@@ -201,6 +249,7 @@ function drawMap() {
 		}
 	}
 	ctx.strokeStyle = 'rgba(100,90,70,0.07)'; ctx.lineWidth = 0.5;
+
 	for (c = 0; c <= COLS; c++) { ctx.beginPath(); ctx.moveTo(c * TW, 0); ctx.lineTo(c * TW, H); ctx.stroke(); }
 	for (r = 0; r <= ROWS; r++) { ctx.beginPath(); ctx.moveTo(0, r * TH); ctx.lineTo(W, r * TH); ctx.stroke(); }
 }
@@ -209,6 +258,7 @@ function renderSVGObjects(highlightCol) {
 	// clear existing object elements
 	var existing = svgLayer.querySelectorAll('.obj-el');
 	var i;
+
 	for (i = 0; i < existing.length; i++) existing[i].parentNode.removeChild(existing[i]);
 
 	for (i = 0; i < objects.length; i++) {
@@ -245,10 +295,12 @@ function draw() {
 }
 
 var lastTime = 0;
+
 function loop(ts) {
 	var dt = Math.min((ts - lastTime) / 1000, 0.05);
 	lastTime = ts;
 	var col = -1;
+
 	if (playing) {
 		var period = (60 / bpm) * COLS;
 		var t = ((Tone.Transport.seconds % period) + period) % period;
@@ -261,6 +313,7 @@ function loop(ts) {
 		col = Math.floor(scanX / TW);
 		if (col !== lastBeat) { lastBeat = col; triggerBeat(col); }
 	}
+
 	draw();
 	renderSVGObjects(col);
 	requestAnimationFrame(loop);
@@ -268,12 +321,14 @@ function loop(ts) {
 
 function isNearWater(col, row) {
 	var r, c;
+
 	for (r = row - 2; r <= row + 2; r++) {
 		for (c = col - 2; c <= col + 2; c++) {
 			if (r < 0 || r >= ROWS || c < 0 || c >= COLS) continue;
 			if (mapTiles[r][c] === 1) return true;
 		}
 	}
+
 	return false;
 }
 
@@ -283,14 +338,20 @@ function isOnHill(col, row) {
 
 function triggerBeat(col) {
 	if (!toneStarted) return;
+
 	var i, obj, now, tOff, oOff, wOff, gOff, fOff, rOff, pOff, note, onHill, nearWater, t;
 	now = Tone.now(); tOff = 0; oOff = 0; wOff = 0; gOff = 0; fOff = 0; rOff = 0; pOff = 0;
+
 	for (i = 0; i < objects.length; i++) {
 		obj = objects[i]; t = obj.type;
+
 		if (obj.col !== col) continue;
+
 		if (muted[t]) continue;
+
 		onHill = isOnHill(obj.col, obj.row);
 		nearWater = isNearWater(obj.col, obj.row);
+
 		if (t === 'tree') {
 			note = onHill ? TNOTES_HILL[obj.row % TNOTES_HILL.length] : TNOTES[obj.row % TNOTES.length];
 			treeSynth.triggerAttackRelease(note, onHill ? '8n' : '16n', now + tOff); tOff += 0.005;
@@ -316,7 +377,9 @@ function triggerBeat(col) {
 
 function playPreview(t, row) {
 	if (!toneStarted) return;
+
 	var now = Tone.now();
+
 	if (t === 'tree') treeSynth.triggerAttackRelease(TNOTES[row % TNOTES.length], '16n', now);
 	else if (t === 'oak') oakSynth.triggerAttackRelease(ONOTES[row % ONOTES.length], '8n', now);
 	else if (t === 'willow') willowSynth.triggerAttackRelease(WNOTES[row % WNOTES.length], '4n', now);
@@ -329,7 +392,9 @@ function playPreview(t, row) {
 function setTool(t) {
 	tool = t;
 	var btns = document.querySelectorAll('.tool-btn'), i;
+
 	for (i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+
 	document.getElementById('btn-' + t).classList.add('active');
 }
 
@@ -359,16 +424,23 @@ canvas.addEventListener('click', function(e) {
 	var rect = canvas.getBoundingClientRect();
 	var col = Math.floor((e.clientX - rect.left) / TW);
 	var row = Math.floor((e.clientY - rect.top) / TH);
+
 	if (col < 0 || col >= COLS || row < 0 || row >= ROWS) return;
 	var kept = [], i;
+
 	if (tool === 'erase') {
 		for (i = 0; i < objects.length; i++) { if (objects[i].col !== col || objects[i].row !== row) kept.push(objects[i]); }
 		objects = kept; renderSVGObjects(-1); return;
 	}
+
 	if (mapTiles[row][col] === 1) return;
+
 	for (i = 0; i < objects.length; i++) { if (objects[i].col !== col || objects[i].row !== row) kept.push(objects[i]); }
+
 	objects = kept;
+
 	objects.push({ col: col, row: row, type: tool });
+
 	Tone.start().then(function() {
 		if (!toneStarted) { initAudio(); toneStarted = true; }
 		playPreview(tool, row);
@@ -376,5 +448,10 @@ canvas.addEventListener('click', function(e) {
 	});
 });
 
-$(function() { generateMap(); resize(); requestAnimationFrame(loop); });
+$(function() {
+	generateMap();
+	resize();
+	requestAnimationFrame(loop);
+});
+
 $(window).on('resize', resize);

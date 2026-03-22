@@ -19,6 +19,11 @@ body {
 	flex-direction: column;
 }
 
+#header {
+	width: 100%;
+	height: 20px;
+}
+
 #toolbar {
 	display: flex;
 	align-items: center;
@@ -157,16 +162,4 @@ canvas {
 	height: 100%;
 	pointer-events: none;
 	overflow: hidden;
-}
-
-#hint {
-	position: absolute;
-	bottom: 10px;
-	left: 50%;
-	transform: translateX(-50%);
-	font-size: 11px;
-	color: #8a7a60;
-	pointer-events: none;
-	letter-spacing: 0.05em;
-	z-index: 10;
 }
